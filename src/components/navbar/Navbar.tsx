@@ -1,72 +1,65 @@
-
-import { Link } from "react-router-dom";
+import { ListIcon } from "@phosphor-icons/react"
+import { useState } from "react"
+import LogoRH from "../../assets/rh-logo.svg"
 
 function Navbar() {
-
-  const isActivePage = (path: string) => {
-    return location.pathname === path;
-  };
+  const [open, setOpen] = useState(false)
 
   return (
-    <nav className="bg-black/95 backdrop-blur-md border-b border-green-800/50 fixed w-full top-0 z-50 shadow-2xl">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          
-          {/* Logo */}
-          <div className="flex items-center">
-            <Link
-              to="/"
-              className="flex items-center space-x-3 hover:opacity-80 transition-all duration-300 group"
-            >
-              <div className="container flex items-center justify-between w-full">
-                <div className="flex flex-1 justify-start">
-                  <div className="text-green-400 font-bold text-xl">
-                    ⚕️ Pharmacy Cadmus
-                  </div>
-                </div>
-              </div>
-            </Link>
-          </div>
+    <nav className="fixed w-full bg-nav-footer shadow-md py-3.5 px-6 h-20 flex items-center justify-center z-50">
+      <div className="container flex items-center justify-between w-full">
+        <a href="#home">
+          <img src={LogoRH} alt="Logo RH" className="w-24 h-auto object-contain" />
+        </a>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
-              <Link
-                to="/"
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:bg-green-800/20 ${
-                  isActivePage('/') || isActivePage('/home')
-                    ? 'text-green-400 bg-green-800/20' 
-                    : 'text-gray-300 hover:text-green-400'
-                }`}
-              >
-                🏠 Home
-              </Link>
-              <Link
-                to="/categorias"
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:bg-green-800/20 ${
-                  isActivePage('/categorias')
-                    ? 'text-green-400 bg-green-800/20' 
-                    : 'text-gray-300 hover:text-green-400'
-                }`}
-              >
-                📁 Categorias
-              </Link>
-              <Link
-                to="/produtos"
-                className={`px-3 py-2 rounded-md text-sm font-medium transition-all duration-300 hover:bg-green-800/20 ${
-                  isActivePage('/produtos')
-                    ? 'text-green-400 bg-green-800/20' 
-                    : 'text-gray-300 hover:text-green-400'
-                }`}
-              >
-                💊 Produtos
-              </Link>
-            </div>
-          </div>
-        </div>
+        <ul className="hidden md:flex items-center gap-6 text-background text-xl">
+          <li className="relative group hover:brightness-105">
+            <a href="#home" className="hover:text-azul-claro transition-colors duration-400">Home</a>
+            <span
+              className="absolute left-0 bottom-[-4px] w-full h-[2px] bg-azul-claro scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100"
+            />
+          </li>
+          <li className="relative group hover:brightness-105">
+            <a href="#sobre" className="hover:text-azul-claro transition-colors duration-400">Sobre Nós</a>
+            <span
+              className="absolute left-0 bottom-[-4px] w-full h-[2px] bg-azul-claro scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100"
+            />
+          </li>
+          <li className="relative group hover:brightness-105">
+            <a href="#servicos" className="hover:text-azul-claro transition-colors duration-400">Serviços</a>
+            <span
+              className="absolute left-0 bottom-[-4px] w-full h-[2px] bg-azul-claro scale-x-0 origin-left transition-transform duration-400 ease-in-out group-hover:scale-x-100"
+            />
+          </li>
+        </ul>
+
+        <button
+          className="md:hidden text-azul-claro text-3xl font-bold"
+          onClick={() => setOpen(!open)}
+          aria-label="Abrir menu"
+        >
+          <ListIcon size={40} weight="light" />
+        </button>
       </div>
+
+      {open && (
+        <ul className="flex flex-col items-end gap-4 bg-nav-footer opacity-95 text-background text-xl px-6 py-4 md:hidden fixed top-20 right-0 z-40 shadow-md rounded-lg w-52">
+          <li className="relative w-full group hover:brightness-105">
+            <a href="#home" onClick={() => setOpen(false)} className="block hover:text-azul-claro transition-colors duration-400 text-right">Home</a>
+            <span className="block border-b border-slate-300 mt-2 w-full" />
+          </li>
+          <li className="relative w-full group hover:brightness-105">
+            <a href="#sobre" onClick={() => setOpen(false)} className="block hover:text-azul-claro transition-colors duration-400 text-right">Sobre Nós</a>
+            <span className="block border-b border-slate-300 mt-2 w-full" />
+          </li>
+          <li className="relative w-full group hover:brightness-105">
+            <a href="#servicos" onClick={() => setOpen(false)} className="block hover:text-azul-claro transition-colors duration-400 text-right">Serviços</a>
+            <span className="block border-b border-slate-300 mt-2 w-full" />
+          </li>
+        </ul>
+      )}
     </nav>
-  );
+  )
 }
 
-export default Navbar;
+export default Navbar

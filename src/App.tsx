@@ -19,7 +19,7 @@ function App() {
             <Route path="/produtos" element={<ProdutoPage />} />
           </Routes>
         </main>
-        <Footer />
+        <Footer /><object data="" type=""></object>
       </div>
     </BrowserRouter>
   );
